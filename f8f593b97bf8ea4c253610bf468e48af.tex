@@ -1,0 +1,43 @@
+\documentclass[tikz]{standalone}
+\begin{document}
+
+
+\usetikzlibrary{decorations.pathreplacing,angles,quotes,calc,positioning,plotmarks}
+\usetikzlibrary{shapes.geometric, arrows, automata,arrows,positioning,calc}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=2cm]
+		\tikzstyle{every state}=[fill=white,draw=black,thick,text=black,scale=1]
+		\node[state]    (A)        		       {No Corrup.};
+		\node[state]    (B)[above right of= B]  at (2.5,2)	     	 {Detected};
+		\node[state]    (C)[below right of= B]	at (2.5,-1.5)	         {Colluding};
+		\node[state]    (D)[right of= B]  at (6,0)				 { Desisted };
+		\node[state]    (E)[right of= B]  at (2,0)				 { Convicted };
+		\node[state]    (F)[right of= B]  at (2,-6)				 { Collab. };
+		\path
+		(A) edge[loop left, left]	    	         node{1}   		        (A)
+		(A) edge[bend right,below]    			     node{2}        		(C)
+		(A) edge[right,below]    			         node{3}        		(B)                     
+		(C) edge[loop below, above]    				 node{4}            	(C)                  
+		(C) edge[very near end,bend left, right]   	 node{5}            	(B)
+		(B) edge[bend right,above]    				 node{6*}            	(A)
+		(C) edge [bend right,below]             	 node{7}                (D)
+		(D) edge [bend right,above]     	         node{8}                (C)
+		(D) edge[loop right]	      				 node{9}                (D)
+		(D) edge[bend right,above]    				 node{10}            	(B)
+		(D) edge [above]    						 node{11}            	(E)
+		(B) edge    								 node{12}            	(E)
+		(C) edge    								 node{13}            	(E)
+		(B) edge[very near end,bend right,left]      node{14}               (F)                    
+		(D) edge[bend left]                			 node{15}               (F)
+		(C) edge[bend left]                			 node{16}               (F)
+		(F) edge[bend left]                			 node{17}               (A)
+		(E) edge[above]                  			 node{18}               (A);
+	\end{tikzpicture}
+\end{document}
+
+                    
